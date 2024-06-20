@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MenuMapper">
+
+    <!-- resultMap : 조회한 컬럼과 DTO를 매핑시키기 위한 설정  -->
+    <resultMap id="employeeResultMap" type="com.ohgiraffers.practice.xmlconfig.EmployeeDTO">
+        <id property="code" column="emp_id"/>
+        <result property="name" column="emp_name"/>
+        <result property="empNo" column="emp_no"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="deptCode" column="dept_code"/>
+        <result property="jobCode" column="job_code"/>
+        <result property="salLevel" column="sal_level"/>
+        <result property="salary" column="salary"/>
+        <result property="bonus" column="bonus"/>
+        <result property="managerId" column="manager_id"/>
+        <result property="hireDate" column="hire_date"/>
+        <result property="entDate" column="ent_date"/>
+        <result property="entYn" column="ent_yn"/>
+    </resultMap>
+
+    <select id="selectAllEmployee" resultMap="employeeResultMap">
+        select
+        emp_id,
+        emp_name,
+        emp_no,
+        email,
+        phone,
+        dept_code,
+        job_code,
+        sal_level,
+        salary,
+        bonus,
+        manager_id,
+        hire_date,
+        ent_date,
+        ent_yn
+        from employee
+    </select>
+
+    <!--  파라미터가 한 개인 경우 바인딩 되는 이름은 상관 없으며 파라미터 타입은 지정하지 않아도 된다.
+          - resultMap : 위에서 생성한 resultMap을 리턴 타입으로 이용하는 경우
+          - resultType : 이미 정의되어 있는 타입을 이용하여 리턴 타입으로 이용하는 경우
+          - parameterType : 매개변수로 받을 타입을 지정한다. 기본형은 앞에 _를 붙여주는것이 관례
+          -->
+    <select id="selectEmployeeByCode" parameterType="_int" resultMap="employeeResultMap">
+        select
+        emp_id,
+        emp_name,
+        emp_no,
+        email,
+        phone,
+        dept_code,
+        job_code,
+        sal_level,
+        salary,
+        bonus,
+        manager_id,
+        hire_date,
+        ent_date,
+        ent_yn
+        from employee
+        where emp_id = #{ code }
+    </select>
+
+    <select id="selectEmployeeByName" parameterType="_String" resultMap="employeeResultMap">
+        select
+        emp_id,
+        emp_name,
+        emp_no,
+        email,
+        phone,
+        dept_code,
+        job_code,
+        sal_level,
+        salary,
+        bonus,
+        manager_id,
+        hire_date,
+        ent_date,
+        ent_yn
+        from employee
+        where emp_name = #{ name }
+    </select>
+
+
+    <!--  insert, update, delete resultType은 작성하지 않고, 기본 _int 수행 결과를 반환한다.  -->
+    <!--  파라미터로 전달된 DTO의 필드명으로 값을 바인딩 해야 하며, getter를 이용하므로 getter가 없으면 에러발생  -->
+    <insert id="insertEmployee" parameterType="com.ohgiraffers.practice.xmlconfig.EmployeeDTO">
+        insert into employee (
+        emp_name,
+        emp_no,
+        email,
+        phone,
+        dept_code,
+        job_code,
+        sal_level,
+        salary,
+        bonus,
+        manager_id,
+        hire_date,
+        ent_date,
+        ent_yn
+        ) values (
+        #{ name },
+        #{ empNo },
+        #{ email },
+        #{ phone },
+        #{ deptCode },
+        #{ jobCode },
+        #{ salLevel },
+        #{ salary },
+        #{ bonus },
+        #{ managerId },
+        #{ hireDate },
+        'null',
+        'N'
+        )
+    </insert>
+
+    <update id="updateEmployee" parameterType="com.ohgiraffers.practice.xmlconfig.EmployeeDTO">
+        update employee
+        set
+        emp_name = #{ name },
+        emp_no = #{ empNo },
+        email = #{ email }
+        phone = #{ phone }
+        dept_code = #{ deptCode }
+        job_code = #{ jobCode }
+        sal_level = #{ salLevel }
+        salary = #{ salary }
+        where
+        emp_id = #{ code }
+    </update>
+
+    <delete id="deleteEmployee" parameterType="_int">
+        delete
+        from employee
+        where emp_id = #{ code }
+    </delete>
+</mapper>
