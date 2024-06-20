@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="MenuMapper">
+<mapper namespace="EmployeeMapper">
 
     <!-- resultMap : 조회한 컬럼과 DTO를 매핑시키기 위한 설정  -->
     <resultMap id="employeeResultMap" type="com.ohgiraffers.practice.xmlconfig.EmployeeDTO">
@@ -66,7 +66,7 @@
         where emp_id = #{ code }
     </select>
 
-    <select id="selectEmployeeByName" parameterType="_String" resultMap="employeeResultMap">
+    <select id="selectEmployeeByName" parameterType="String" resultMap="employeeResultMap">
         select
         emp_id,
         emp_name,

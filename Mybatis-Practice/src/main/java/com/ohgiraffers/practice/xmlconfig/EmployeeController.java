@@ -1,6 +1,6 @@
 package com.ohgiraffers.practice.xmlconfig;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +15,7 @@ public class EmployeeController {
     }
 
 
-    public static void selectAllEmployee() {
+    public void selectAllEmployee() {
 
         List<EmployeeDTO> employeeList = employeeService.selectAllEmployee();
 
@@ -30,7 +30,7 @@ public class EmployeeController {
 
         int code = Integer.parseInt(parameter.get("code"));
 
-        EmployeeDTO emp = EmployeeService.selectEmployeeByCode(code);
+        EmployeeDTO emp = employeeService.selectEmployeeByCode(code);
 
         if(emp != null) {
             printResult.printEmployee(emp);
@@ -43,7 +43,7 @@ public class EmployeeController {
 
         String name = parameter.get("name");
 
-        EmployeeDTO emp = EmployeeService.selectEmployeeByName(name);
+        EmployeeDTO emp = employeeService.selectEmployeeByName(name);
 
         if(emp != null) {
             printResult.printEmployee(emp);
@@ -79,9 +79,9 @@ public class EmployeeController {
         emp.setSalary(salary);
         emp.setBonus(bonus);
         emp.setManagerId(mngId);
-        emp.setHireDate(hire);
+        emp.setHireDate(Date.valueOf(hire));
 
-        boolean result = EmployeeService.registEmployee(emp);
+        boolean result = employeeService.registEmployee(emp);
 
         if(result) {
             printResult.printSuccessMessage("insert");
@@ -112,7 +112,7 @@ public class EmployeeController {
         emp.setSalLevel(salLevel);
         emp.setSalary(salary);
 
-        boolean result = EmployeeService.modifyEmployee(emp);
+        boolean result = employeeService.modifyEmployee(emp);
 
         if(result) {
             printResult.printSuccessMessage("update");

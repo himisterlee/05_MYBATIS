@@ -22,12 +22,12 @@ public class Application {
             int no = sc.nextInt();
 
             switch (no) {
-                case 1: EmployeeController.selectAllEmployee(); break;
-                case 2: EmployeeController.selectEmployeeByCode(inputEmployeeCode); break;
-                case 3: EmployeeController.selectEmployeeByName(inputEmployeeName); break;
-                case 4: EmployeeController.registEmployee(inputEmployee); break;
-                case 5: EmployeeController.modifyEmployee(inputModifyEmployee); break;
-                case 6: EmployeeController.deleteEmployee(inputEmployeeCode); break;
+                case 1: employeeController.selectAllEmployee(); break;
+                case 2: employeeController.selectEmployeeByCode(inputEmployeeCode()); break;
+                case 3: employeeController.selectEmployeeByName(inputEmployeeName()); break;
+                case 4: employeeController.registEmployee(inputEmployee()); break;
+                case 5: employeeController.modifyEmployee(inputModifyEmployee()); break;
+                case 6: employeeController.deleteEmployee(inputEmployeeCode()); break;
                 default:
                     System.out.println("잘못된 메뉴를 선택하셨습니다.");
                     break;
