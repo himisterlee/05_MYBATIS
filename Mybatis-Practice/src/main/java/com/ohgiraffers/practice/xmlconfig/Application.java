@@ -112,6 +112,8 @@ public class Application {
 
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("수정할 직원의 번호를 입력하세요 : ");
+        String code = sc.nextLine();
         System.out.println("수정할 직원의 이름을 입력하세요 : ");
         String name = sc.nextLine();
         System.out.println("수정할 직원의 주민등록번호를 입력하세요 : ");
@@ -130,6 +132,7 @@ public class Application {
         String salary = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
+        parameter.put("code", code);
         parameter.put("name", name);
         parameter.put("num", num);
         parameter.put("email", email);

@@ -6,8 +6,8 @@
 
     <!-- resultMap : 조회한 컬럼과 DTO를 매핑시키기 위한 설정  -->
     <resultMap id="employeeResultMap" type="com.ohgiraffers.practice.xmlconfig.EmployeeDTO">
-        <id property="code" column="emp_id"/>
-        <result property="name" column="emp_name"/>
+        <id property="empId" column="emp_id"/>
+        <result property="empName" column="emp_name"/>
         <result property="empNo" column="emp_no"/>
         <result property="email" column="email"/>
         <result property="phone" column="phone"/>
@@ -63,7 +63,7 @@
         ent_date,
         ent_yn
         from employee
-        where emp_id = #{ code }
+        where emp_id = #{ empId }
     </select>
 
     <select id="selectEmployeeByName" parameterType="String" resultMap="employeeResultMap">
@@ -83,7 +83,7 @@
         ent_date,
         ent_yn
         from employee
-        where emp_name = #{ name }
+        where emp_name = #{ empName }
     </select>
 
 
@@ -105,7 +105,7 @@
         ent_date,
         ent_yn
         ) values (
-        #{ name },
+        #{ empName },
         #{ empNo },
         #{ email },
         #{ phone },
@@ -124,7 +124,7 @@
     <update id="updateEmployee" parameterType="com.ohgiraffers.practice.xmlconfig.EmployeeDTO">
         update employee
         set
-        emp_name = #{ name },
+        emp_name = #{ empName },
         emp_no = #{ empNo },
         email = #{ email }
         phone = #{ phone }
@@ -133,12 +133,12 @@
         sal_level = #{ salLevel }
         salary = #{ salary }
         where
-        emp_id = #{ code }
+        emp_id = #{ empId }
     </update>
 
     <delete id="deleteEmployee" parameterType="_int">
         delete
         from employee
-        where emp_id = #{ code }
+        where emp_id = #{ empId }
     </delete>
 </mapper>
