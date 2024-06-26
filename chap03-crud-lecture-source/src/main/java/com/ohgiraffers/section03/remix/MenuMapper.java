@@ -7,5 +7,11 @@ public interface MenuMapper {
 
     List<MenuDTO> selectAllMenu();
 
-    MenuDTO selectMenuByCode
+    MenuDTO selectMenuByCode(int code);
+
+    int insertMenu(MenuDTO menu);
+
+    int modifyMenu(MenuDTO menu);
+
+    int deleteMenu(int code);
 }
